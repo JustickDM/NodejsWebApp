@@ -1,8 +1,13 @@
 'use strict';
-var http = require('http');
+
+const express = require("express");
+const app = express();
+
 var port = process.env.PORT || 1337;
 
-http.createServer(function (req, res) {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello World\n');
-}).listen(port);
+app.get("/", function (request, response) {
+
+    response.end("Hello from Express!");
+});
+
+app.listen(port);
