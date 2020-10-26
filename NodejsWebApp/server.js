@@ -1,9 +1,10 @@
 'use strict';
 
-var port = process.env.PORT || 1337;
-var serverLogsPath = "server.log";
-var dbLogsPath = "db.log";
-var dbUri = "mongodb://localhost:27017/";
+const port = process.env.PORT || 1337;
+const serverLogsPath = "server.log";
+const dbLogsPath = "db.log";
+const dbUri = "mongodb://localhost:27017/";
+const dbName = "local";
 
 const express = require("express");
 const MongoClient = require("mongodb").MongoClient;
@@ -32,7 +33,7 @@ app.get("/Users", function (request, response){
             response.sendStatus(418);
         }
         else {
-            const db = client.db("local");
+            const db = client.db(dbName);
             const collection = db.collection("users");
 
             collection.find().toArray(function (error, results) {
