@@ -32,6 +32,7 @@ app.get("/getUsers", function (request, response) {
             { id: 1, name: "Max" },
             { id: 2, name: "Tom" }
         ]);
+    response.sendStatus(200);
 });
 
 app.listen(port);
