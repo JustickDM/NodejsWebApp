@@ -26,4 +26,12 @@ app.get("/", function (request, response)
     response.end("Hello from Express!");
 });
 
+app.get("/getUsers", function (request, response) {
+    response.send(
+        [
+            { id: 1, name: "Max" },
+            { id: 2, name: "Tom" }
+        ]);
+});
+
 app.listen(port);
