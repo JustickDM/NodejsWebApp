@@ -40,22 +40,25 @@ app.get("/Users", function (request, response){
 
         if (error) {
             writeLog(error, dbLogsPath);
+
+            response.sendStatus(418);
         }
+        else {
+            const db = client.db("local");
+            const collection = db.collection("users");
 
-        const db = client.db("local");
-        const collection = db.collection("users");
+            collection.find().toArray(function (error, results) {
 
-        collection.find().toArray(function (error, results) {
+                if (error) {
+                    writeLog(error, dbLogsPath);
+                }
 
-            if (error) {
-                writeLog(error, dbLogsPath);
-            }
-            
-            response.send(results);
-            response.sendStatus(200);
+                response.send(results);
+                response.sendStatus(200);
 
-            client.close();
-        });
+                client.close();
+            });
+		}
     });
 });
 
